@@ -5,10 +5,10 @@ import string
 def test_del_project(app):
     app.session.login("administrator", "root")
     app.project.open_project_page()
-    if len(old_projects) == 0:
-        app.project.create_project(Project(name=random_string("Project_", 10)))
     # old_projects = app.project.get_project_list()
     old_projects = app.soap.get_project_from_soap()
+    if len(old_projects) == 0:
+        app.project.create_project(Project(name=random_string("Project_", 10)))
     deleted_project = random.choice(old_projects)
     app.project.delete_project(deleted_project.name)
     #new_projects = app.project.get_project_list()
